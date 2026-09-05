@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سَكينة — تسبيح وحفظ القرآن</title>
+<meta name="description" content="سَكينة: سجّل الأذكار بصوتك، احفظ القرآن آية آية، وتابع مواقيت صلاتك — كل هذا بمكان واحد.">
+<link rel="icon" type="image/png" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF8F3; --surface:#FFFFFF;
+    --primary:#123832; --primary-light:#1F5C52; --primary-tint:#E7EFEC;
+    --gold:#B9922F; --gold-tint:#F7EFDD;
+    --ink:#1C211F; --muted:#6E7871; --divider:#EBE7DC;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Cairo',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.7;
+  }
+  .container{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+  /* nav */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,248,243,.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--divider);
+  }
+  nav .container{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:14px; padding-bottom:14px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; font-size:17px;}
+  .brand img{width:34px; height:34px; border-radius:9px;}
+  nav a.cta{
+    background:var(--ink); color:#fff; padding:9px 20px; border-radius:100px;
+    font-weight:700; font-size:13px; text-decoration:none;
+  }
+
+  /* hero */
+  .hero{
+    padding:80px 0 60px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; top:-140px; right:50%; transform:translateX(50%);
+    width:520px; height:520px; border-radius:50%;
+    background:radial-gradient(circle, rgba(185,146,39,.14), transparent 70%);
+    z-index:0;
+  }
+  .hero-content{position:relative; z-index:1;}
+  .hero img.icon{
+    width:96px; height:96px; border-radius:24px;
+    box-shadow:0 24px 50px -16px rgba(18,56,50,.4);
+    margin-bottom:28px;
+  }
+  .hero h1{
+    font-family:'Amiri',serif;
+    font-size:44px; font-weight:700;
+    max-width:640px; margin:0 auto 18px;
+    line-height:1.5;
+  }
+  .hero h1 span{color:var(--gold);}
+  .hero p{
+    font-size:16px; color:var(--muted);
+    max-width:520px; margin:0 auto 36px;
+  }
+  .store-badges{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .store-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--ink); color:#fff;
+    padding:13px 26px; border-radius:14px;
+    text-decoration:none; font-weight:700; font-size:14px;
+    transition:transform .2s ease;
+  }
+  .store-btn:hover{transform:translateY(-2px);}
+  .store-btn svg{width:22px; height:22px; flex-shrink:0;}
+  .store-btn .btn-sub{display:block; font-size:10px; font-weight:500; opacity:.7;}
+  .store-btn .btn-main{display:block; font-size:15px;}
+
+  /* features */
+  .features{padding:70px 0;}
+  .section-head{text-align:center; margin-bottom:50px;}
+  .section-head span{color:var(--gold); font-weight:800; font-size:12px; letter-spacing:.5px;}
+  .section-head h2{font-family:'Amiri',serif; font-size:30px; font-weight:700; margin-top:8px;}
+
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:24px;
+  }
+  .feature-card{
+    background:var(--surface);
+    border:1px solid var(--divider);
+    border-radius:22px;
+    padding:28px 24px;
+  }
+  .feature-icon{
+    width:52px; height:52px; border-radius:16px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px;
+    margin-bottom:18px;
+    background:var(--primary-tint);
+  }
+  .feature-card:nth-child(2) .feature-icon{background:var(--gold-tint);}
+  .feature-card:nth-child(3) .feature-icon{background:#EAEFF7;}
+  .feature-card:nth-child(4) .feature-icon{background:#F3E9EC;}
+  .feature-card:nth-child(5) .feature-icon{background:#EAF3EF;}
+  .feature-card:nth-child(6) .feature-icon{background:#EFEAF7;}
+  .feature-card h3{font-size:16.5px; font-weight:800; margin-bottom:10px;}
+  .feature-card p{font-size:13.5px; color:var(--muted);}
+
+  /* mid cta */
+  .mid-cta{
+    background:linear-gradient(150deg, var(--primary), #0C2622);
+    border-radius:32px;
+    margin:20px auto 80px;
+    max-width:1080px;
+    padding:60px 32px;
+    text-align:center;
+    color:#fff;
+  }
+  .mid-cta h2{font-family:'Amiri',serif; font-size:28px; margin-bottom:14px;}
+  .mid-cta p{color:rgba(255,255,255,.7); margin-bottom:30px; max-width:440px; margin-left:auto; margin-right:auto;}
+
+  footer{
+    border-top:1px solid var(--divider);
+    padding:36px 0;
+    text-align:center;
+    font-size:12.5px;
+    color:var(--muted);
+  }
+  footer a{color:var(--muted); text-decoration:underline; margin:0 8px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="brand">
+      <img src="assets/icon-512.png" alt="أيقونة سَكينة">
+      سَكينة
+    </div>
+    <a class="cta" href="#download">حمّل التطبيق</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-content">
+    <img class="icon" src="assets/icon-512.png" alt="أيقونة تطبيق سَكينة">
+    <h1>أذكارك <span>بصوتك</span>، وحفظك خطوة خطوة</h1>
+    <p>سجّل الأذكار بصوتك الخاص، احفظ القرآن آية آية بمتابعة حقيقية، وتابع مواقيت صلاتك أينما كنت — كل هذا بتطبيق واحد هادئ ومجاني.</p>
+    <div class="store-badges" id="download">
+      <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.sakina.app" target="_blank" rel="noopener">
+        <svg viewBox="0 0 512 512" fill="none"><path d="M99 8.5C93 12 89 18 89 26v460c0 8 4 14 10 17.5l254-251.5L99 8.5z" fill="#00D2FF"/><path d="M99 8.5 353 252l70-69c10-10 10-27 0-37L169 25c-20-12-50-18-70-16.5z" fill="#00F076"/><path d="M99 503.5c20 1.5 50-4.5 70-16.5l254-121c10-10 10-27 0-37l-70-69-254 243.5z" fill="#FF3A44"/><path d="M353 252 99 8.5 353 252l-254 243.5L353 252z" fill="#FFCF00"/></svg>
+        <span>
+          <span class="btn-sub">احصل عليه من</span>
+          <span class="btn-main">Google Play</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="features">
+  <div class="container">
+    <div class="section-head">
+      <span>الميزات</span>
+      <h2>كل شي محتاجه بيومك الديني</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎙️</div>
+        <h3>أذكار بصوتك</h3>
+        <p>سجّل الأذكار بصوتك الخاص واستمع لها كل يوم — تجربة شخصية ما بتلاقيها بأي تطبيق تاني.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📖</div>
+        <h3>حفظ القرآن</h3>
+        <p>سمّع تلاوتك آية آية، وتابع نسبة حفظك لكل سورة بشكل حقيقي ودقيق.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🕌</div>
+        <h3>مواقيت الصلاة</h3>
+        <p>حساب دقيق لمواقيت صلاتك حسب موقعك الفعلي، مع تنبيهات الأذان.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📿</div>
+        <h3>تسبيح ومسبحة</h3>
+        <p>عداد تسبيح تفاعلي بحركة هادئة، يحفظ تقدمك اليومي تلقائياً.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏅</div>
+        <h3>إنجازات حقيقية</h3>
+        <p>سلسلة أيام وشارات تُفتح فعلياً بناءً على استخدامك، مش أرقام وهمية.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>حاسبة الزكاة</h3>
+        <p>احسب زكاتك بدقة حسب النصاب الشرعي، بخطوات واضحة وسهلة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mid-cta">
+  <h2>ابدأ رحلتك مع سَكينة اليوم</h2>
+  <p>مجاني بالكامل، وبدون تسجيل دخول مزعج — افتح التطبيق وابدأ فوراً.</p>
+  <a class="store-btn" style="background:var(--gold); color:#2b2007;" href="https://play.google.com/store/apps/details?id=com.sakina.app" target="_blank" rel="noopener">
+    <span>
+      <span class="btn-sub" style="opacity:.75;">حمّله الآن من</span>
+      <span class="btn-main">Google Play</span>
+    </span>
+  </a>
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2026 سَكينة. جميع الحقوق محفوظة.</p>
+    <p style="margin-top:10px;">
+      <a href="privacy-policy.html">سياسة الخصوصية</a>
+      ·
+      <a href="mailto:support@example.com">تواصل معنا</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
